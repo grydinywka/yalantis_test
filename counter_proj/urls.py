@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.views.generic.base import TemplateView
+from unique_counter.views import CounterView
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', CounterView.as_view()),
 ]
