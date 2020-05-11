@@ -126,3 +126,29 @@ STATIC_URL = '/static/'
 
 SESSION_COOKIE_AGE = 20*365*24*60*60 # 20 years
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'errors.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'unique_counter.views': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
+    }
+}
+

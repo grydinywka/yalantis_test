@@ -1,7 +1,9 @@
+import logging
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.http import HttpResponseNotFound
 from django.contrib.sessions.models import Session
+from django.views.decorators.csrf import csrf_exempt
 
 
 class CounterView(TemplateView):
@@ -9,11 +11,9 @@ class CounterView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-#        print(dir(self.request.session), self.request.session.get_expiry_date())
         if self.request.session.get('is_new_user', True):
             context['is_new_user'] = True
             self.request.session['is_new_user'] = False
-            # self.request.session.set_expiry(5)
             counter = 1
         else:
             context['is_new_user'] = False
@@ -22,7 +22,11 @@ class CounterView(TemplateView):
         context['all'] = counter
         return context
     
+    @csrf_exempt
     def dispatch(self, *args, **kwargs):
         if self.request.method != 'GET':
+            logger = logging.getLogger(__name__)
+            logger.error("Only GET method is allowed. You are using {}".format(self.request.method))
             return HttpResponseNotFound('Only GETs are allowed')
         return super().dispatch(*args, **kwargs)
+
