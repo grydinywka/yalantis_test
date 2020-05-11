@@ -5,14 +5,15 @@ from django.contrib.sessions.models import Session
 
 
 class CounterView(TemplateView):
-    template_name = "unique_counter/base.html"
+    template_name = "unique_counter/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-#        print(dir(self.request.session), kwargs)
+#        print(dir(self.request.session), self.request.session.get_expiry_date())
         if self.request.session.get('is_new_user', True):
             context['is_new_user'] = True
             self.request.session['is_new_user'] = False
+            # self.request.session.set_expiry(5)
             counter = 1
         else:
             context['is_new_user'] = False

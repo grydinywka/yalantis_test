@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" value="The test task from Ignatenko to Yalantis Golang School (online) " />
+    <title>Ignatenko-test</title>
+
+    <!-- Styles Section -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="header">
+            <div class="col-sm-12 text-center">
+                <h1>Test task for Yalantis Golang School (online) </h1>
+            </div>
+        </div>
+        <div class="row" id="content">
+            <div class="col-12 d-flex justify-content-center align-self-center">
+            {% block context %}
+                <h1 class="base-header">
+                    {% if is_new_user %}<p>You are a new visitor!</p>{% endif %}
+                    <p>The page was visited by {{ all }} customer{% if all > 1 %}s{% endif %}.</p>
+                </h1>
+            {% endblock context %}
+            </div>
+        </div>
+        <div class="row" id="footer">
+            <div class="col-12">
+                <p>&copy; Test task from Ignatenko for Yalantis, 2020</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascripts Section -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
